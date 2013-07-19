@@ -1,0 +1,88 @@
+/* (c) Orbisius.com */
+.orbisius_beta_feedback_container {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    font-family: sans-serif;
+}
+
+.orbisius_beta_feedback_container .hide {
+    display: none;
+}
+
+.orbisius_beta_feedback_container .success {
+    color:green;
+}
+
+.orbisius_beta_feedback_container .error {
+    color:red;
+}
+
+.orbisius_beta_feedback_container .result {
+    padding:3px;
+    background: #ffff99;
+}
+
+.orbisius_beta_feedback_container .feedback_wrapper {
+    background: none repeat scroll 0 0 #ccc;
+    height: auto;
+    margin: auto;
+    width: 50%;
+    padding:5px;
+    border:1px dashed #777;
+}
+
+.orbisius_beta_feedback_container .feedback_wrapper_short {
+    width: 20%;
+}
+
+.orbisius_beta_feedback_container .feedback {
+
+}
+
+.orbisius_beta_feedback_container .feedback_text {
+    width: 60%;
+    padding:5px;
+}
+
+.orbisius_beta_feedback_container .feedback_email {
+    padding:5px;
+    width: 25%;
+}
+
+.orbisius_beta_feedback_container input[type=submit] {
+    padding:3px;
+}
+
+.orbisius_beta_feedback_container .powered_by {
+    text-align:right;
+    vertical-align:bottom;
+    font-size: 12px;
+}
+
+.orbisius_beta_feedback_container .close_button_link {
+    float: right;
+    padding-right: 2px;
+}
+
+.orbisius_beta_feedback_container .close_button {
+    text-align:right;
+    vertical-align:top;
+    font-size: 12px;
+    padding-left:3px;
+    padding-right:3px;
+    border:1px solid #006666;
+}
+
+.orbisius_beta_feedback_container .loading {
+    padding:3px;
+    background: #ffff99;
+}
+
+.orbisius_beta_feedback_container .need_input {
+    padding:3px;
+    background: #ffff99;
+    border:1px dashed #ff3333;
+}
