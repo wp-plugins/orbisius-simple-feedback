@@ -3,7 +3,7 @@
 Plugin Name: Orbisius Simple Feedback
 Plugin URI: http://club.orbisius.com/products/wordpress-plugins/orbisius-simple-feedback/
 Description: Generates a nice & simple Feedback form which is positioned at the bottom center of your visitor's browser window.
-Version: 1.0.0
+Version: 1.0.1
 Author: Svetoslav Marinov (Slavi)
 Author URI: http://orbisius.com
 */
@@ -27,11 +27,11 @@ Author URI: http://orbisius.com
 
 // Set up plugin
 add_action( 'init', 'orbisius_simple_feedback_init', 0 );
+
 add_action( 'admin_menu', 'orbisius_simple_feedback_setup_admin' );
 add_action( 'wp_head', 'orbisius_simple_feedback_config');
 add_action( 'admin_head', 'orbisius_simple_feedback_config');
 add_action( 'wp_footer', 'orbisius_simple_feedback_inject_feedback' ); // be the last in the footer
-add_action( 'wp_footer', 'orbisius_simple_feedback_add_plugin_credits', 1000 ); // be the last in the footer
 
 add_action( 'wp_ajax_orbisius_simple_feedback_ajax', 'orbisius_simple_feedback_handle_ajax');
 add_action( 'wp_ajax_nopriv_orbisius_simple_feedback_ajax', 'orbisius_simple_feedback_handle_ajax');
@@ -82,6 +82,13 @@ function orbisius_simple_feedback_init() {
 
     wp_register_script( 'simple_feedback', plugins_url("/assets/main{$suffix}.js", __FILE__), array('jquery', ), '1.0', true );
     wp_enqueue_script( 'simple_feedback');
+
+    $opts = orbisius_simple_feedback_get_options();
+
+    if (!empty($opts['show_in_admin'])) {
+        add_action( 'admin_enqueue_scripts', 'orbisius_simple_feedback_init' );
+        add_action( 'admin_footer', 'orbisius_simple_feedback_inject_feedback' ); // be the last in the footer
+    }
 }
 
 /**
@@ -282,6 +289,7 @@ function orbisius_simple_feedback_validate_settings($input) { // whitelist optio
 function orbisius_simple_feedback_get_options() {
     $defaults = array(
         'status' => 1,
+        'show_in_admin' => 0,
         'call_to_action' => 'Share your feedback',
     );
     
@@ -319,7 +327,7 @@ function orbisius_simple_feedback_options_page() {
                         </label>
                         <br/>
                         <label for="radio2">
-                            <input type="radio" name="orbisius_simple_feedback_options[status]"  id="radio2"
+                            <input type="radio" id="radio2" name="orbisius_simple_feedback_options[status]"
                                 value="0" <?php echo!empty($opts['status']) ? '' : 'checked="checked"'; ?> /> Disabled
                         </label>
                         <p>This will stop remove the feedback form.</p>
@@ -334,6 +342,20 @@ function orbisius_simple_feedback_options_page() {
                                 value="<?php echo esc_attr($opts['call_to_action']); ?>" />
                         </label>
                         <p>Example: Share your feedback.</p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <th scope="row">Show in Admin area</th>
+                    <td>
+                        <label for="radio_show_in_admin_enabled">
+                            <input type="radio" id="radio_show_in_admin_enabled" name="orbisius_simple_feedback_options[show_in_admin]"
+                                value="1" <?php echo empty($opts['show_in_admin']) ? '' : 'checked="checked"'; ?> /> Enabled
+                        </label>
+                        <br/>
+                        <label for="radio_show_in_admin_disabled">
+                            <input type="radio" id="radio_show_in_admin_disabled" name="orbisius_simple_feedback_options[show_in_admin]" 
+                                value="0" <?php echo!empty($opts['show_in_admin']) ? '' : 'checked="checked"'; ?> /> Disabled
+                        </label>
                     </td>
                 </tr>
 

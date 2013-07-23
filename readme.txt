@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: wp,orbisius,feedback,chat,contact,contact form,contact, contact button, contact chat, contact form, contact plugin, contact us, contact form 7
 Requires at least: 2.6
 Tested up to: 3.5.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 
 Generates a nice & simple Feedback form which is positioned at the bottom center of your visitor's browser window.
@@ -69,5 +69,8 @@ add_filter('orbisius_simple_feedback_filter_powered_by', '__return_false', 10);
 
 == Changelog ==
 
+= 1.0.1 =
+* Added a setting so the feedback box can be optionally shown in the admin area as well.
+
 = 1.0.0 =
-Initial release
+* Initial release
