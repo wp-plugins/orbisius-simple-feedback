@@ -76,6 +76,8 @@ add_filter('orbisius_simple_feedback_filter_powered_by', '__return_false', 10);
 * Added an option to choose of having a textbox or a textarea for the feedback message
 * Changed send_feedback name to include plugin's prefix
 * Fixes and improvements
+* Hid status -> not necessary to enable it explicitely
+* Improved the UI of the settings page.
 * Tested with WP 3.8.1
 
 = 1.0.1 =
