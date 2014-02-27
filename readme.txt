@@ -71,6 +71,10 @@ add_filter('orbisius_simple_feedback_filter_powered_by', '__return_false', 10);
 
 == Changelog ==
 
+= 1.0.3 =
+* Showing the success message near the send button
+* Autohide on success after 3.5 sec
+
 = 1.0.2 =
 * Including the IP address(es) of the person and their browser in the message
 * Added alignment options for the feedback call to action: bottom left, bottom center, bottom right.

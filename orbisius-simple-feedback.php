@@ -3,7 +3,7 @@
 Plugin Name: Orbisius Simple Feedback
 Plugin URI: http://club.orbisius.com/products/wordpress-plugins/orbisius-simple-feedback/
 Description: Generates a nice & simple Feedback form which is positioned at the bottom center of your visitor's browser window.
-Version: 1.0.2
+Version: 1.0.3
 Author: Svetoslav Marinov (Slavi)
 Author URI: http://orbisius.com
 */
@@ -199,7 +199,7 @@ function orbisius_simple_feedback_inject_feedback() {
 <div class="orbisius_simple_feedback_container">
     <div class="feedback_wrapper feedback_wrapper_short feedback_wrapper_$call_to_action_alignment" onmouseover="try { orbisius_simple_feedback_setup_js(); } catch (e) {} ">
         <div class="feedback_title">
-			<strong>$call_to_action</strong> <span class="result hide"></span>
+			<strong>$call_to_action</strong>
             <a href="javascript:void(0);" class='close_button_link hide'><span __class='close_button'>X</span></a>
         </div>
 		<div class="feedback hide">
@@ -207,6 +207,7 @@ function orbisius_simple_feedback_inject_feedback() {
 				$text_box
 				<input type="text" id="feedback_email" name="feedback_email" value="$email" class="feedback_email" placeholder="Your email" />
 				<input type="submit" id="orbisius_beta_feedback_form_submit" name="send" value="send" />
+                <span class="result hide"></span>
 			</form>
 			$powered_by_line
 		</div>

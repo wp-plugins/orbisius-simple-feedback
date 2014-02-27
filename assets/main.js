@@ -49,6 +49,8 @@ function orbisius_simple_feedback_setup_js() {
         $('.orbisius_simple_feedback_container .feedback').hide();
         $('.feedback_wrapper').addClass('feedback_wrapper_short'); // shrink the feedback container
         $('.close_button_link').hide();
+        $('.orbisius_simple_feedback_container .result').text('').removeClass('error success').hide();
+        $('#feedback_text').val('');
     });
 
     $('#orbisius_beta_feedback_form').submit(function (e) {
@@ -90,6 +92,9 @@ function orbisius_simple_feedback_setup_js() {
             success: function(json) {
                if (json.status) {
                   $('.orbisius_simple_feedback_container .result').text('Sent.').addClass('success').show();
+                    setTimeout(function () {
+                        $('.orbisius_simple_feedback_container .close_button_link').trigger('click');
+                    }, 3500);
                } else {
                   //alert("There was an error.");
                   $('.orbisius_simple_feedback_container .result').text('There was an error.').addClass('error').show();
