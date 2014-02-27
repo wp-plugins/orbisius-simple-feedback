@@ -153,7 +153,13 @@ function orbisius_simple_feedback_inject_feedback() {
         return ;
     }
 
-    $xyz = "<a href='{$data['url']}' target='_blank'>{$data['name']}</a>";
+    $url = preg_replace('#\?.*#si', '', $data['url']);
+
+    $site = site_url();
+    $site = urlencode($site);
+    $url .= "?utm_source=$site&utm_medium=frontend&utm_campaign=product";
+    
+    $xyz = "<a href='$url' target='_blank' title='opens in a new tab/page.'>{$data['name']}</a>";
 
     $powered_by_line = "<div class='powered_by'>Powered by $xyz</div>";
 

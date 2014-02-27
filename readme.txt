@@ -81,6 +81,7 @@ add_filter('orbisius_simple_feedback_filter_powered_by', '__return_false', 10);
 * Hid status -> not necessary to enable it explicitely
 * Improved the UI of the settings page.
 * Updated screenshots and added 2 more for left and right align of the call to action
+* made the feedback box and the email box occupy as much space as the feedback container so they looks nicer.
 * Tested with WP 3.8.1
 
 = 1.0.1 =

@@ -49,22 +49,13 @@
     float: right;
 }
 
-.orbisius_simple_feedback_container .feedback_wrapper_short {
-    _width: 5%;
-}
-
 .orbisius_simple_feedback_container .feedback {
 
 }
 
-.orbisius_simple_feedback_container .feedback_text {
-    width: 60%;
+.orbisius_simple_feedback_container .feedback_text, .orbisius_simple_feedback_container .feedback_email {
+    width: 96%;
     padding:5px;
-}
-
-.orbisius_simple_feedback_container .feedback_email {
-    padding:5px;
-    width: 25%;
 }
 
 .orbisius_simple_feedback_container input[type=submit] {
