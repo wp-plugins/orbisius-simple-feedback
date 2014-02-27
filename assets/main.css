@@ -38,7 +38,7 @@
     width: 50%;*/
     /* by using this approach the call to action text box takes as much space as it needs */
     float: left;
-    margin-left:50%;
+    margin-left:45%;
 }
 
 .orbisius_beta_feedback_container .feedback_wrapper_bottom_left {
