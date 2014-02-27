@@ -84,6 +84,7 @@ add_filter('orbisius_simple_feedback_filter_powered_by', '__return_false', 10);
 * made the feedback box and the email box occupy as much space as the feedback container so they looks nicer.
 * Set the default align to be bottom right
 * Added an uninstall.php file.
+* Added an option to include an image (lightbulb) near the call to action - image from famfamfam
 * Tested with WP 3.8.1
 
 = 1.0.1 =

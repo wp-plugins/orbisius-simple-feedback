@@ -175,8 +175,19 @@ function orbisius_simple_feedback_inject_feedback() {
        $email = esc_attr($email);
     }
 
+    $img_src = plugins_url("/assets/lightbulb.png", __FILE__);
     $call_to_action = empty($opts['call_to_action']) ? 'Feedback' : $opts['call_to_action'];
     $call_to_action_alignment = empty($opts['call_to_action_alignment']) ? '' : $opts['call_to_action_alignment'];
+
+    $call_to_action_type = empty($opts['call_to_action_type']) ? '' : $opts['call_to_action_type'];
+
+    if ($call_to_action_type == 'image') {
+        $call_to_action = "<img src='$img_src' alt='Feedback' />";
+    } else if ($call_to_action_type == 'text') {
+        // no change. Call to action is text now.
+    } else {
+        $call_to_action = "<img src='$img_src' alt='Feedback' />" . $call_to_action;
+    }
 
     if ($opts['feedback_box'] == 'input_text') {
         $text_box = '<input type="text" id="feedback_text" name="feedback_text" value="" class="feedback_text" placeholder="Enter your feedback here..." autocomplete="off" />';
@@ -344,9 +355,10 @@ function orbisius_simple_feedback_validate_settings($input) { // whitelist optio
 function orbisius_simple_feedback_get_options() {
     $defaults = array(
         'status' => 1,
+        'feedback_box' => 'textarea',
         'show_in_admin' => 0,
         'call_to_action' => 'Feedback',
-        'feedback_box' => 'textarea',
+        'call_to_action_type' => 'image_text',
         'call_to_action_alignment' => 'bottom_right',
     );
     
@@ -422,6 +434,23 @@ function orbisius_simple_feedback_options_page() {
 
                                                     echo orbisius_simple_feedback_util::html_boxes('orbisius_simple_feedback_options[call_to_action_alignment]',
                                                             empty($opts['call_to_action_alignment']) ? '' : $opts['call_to_action_alignment'], $call_to_action_alignment_opts); ?>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Call to Action Type</th>
+                                            <td>
+                                                <label for="orbisius_simple_feedback_options_call_to_action_type">
+                                                    <?php
+
+                                                    $call_to_action_type_opts = array(
+                                                        'text' => 'Text',
+                                                        'image' => 'Image',
+                                                        'image_text' => 'Image + Text',
+                                                    );
+
+                                                    echo orbisius_simple_feedback_util::html_boxes('orbisius_simple_feedback_options[call_to_action_type]',
+                                                            empty($opts['call_to_action_type']) ? '' : $opts['call_to_action_type'], $call_to_action_type_opts); ?>
                                                 </label>
                                             </td>
                                         </tr>
