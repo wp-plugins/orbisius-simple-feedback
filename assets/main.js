@@ -37,16 +37,16 @@ function orbisius_simple_feedback_setup_js() {
     
     // let's show the form when the mouse is over the title
     // let's not handle mouseleave because we don't want the form to disappear.
-    $('.orbisius_beta_feedback_container .feedback_wrapper').on("mouseenter", function (e) {
-        $('.orbisius_beta_feedback_container .feedback').show();
+    $('.orbisius_simple_feedback_container .feedback_wrapper').on("mouseenter", function (e) {
+        $('.orbisius_simple_feedback_container .feedback').show();
         $('.feedback_wrapper').removeClass('feedback_wrapper_short'); // expand the feedback container
         $('#feedback_text').focus();
         $('.close_button_link').show();
     });
 
     // this
-    $('.orbisius_beta_feedback_container .close_button_link').on("click", function (e) {
-        $('.orbisius_beta_feedback_container .feedback').hide();
+    $('.orbisius_simple_feedback_container .close_button_link').on("click", function (e) {
+        $('.orbisius_simple_feedback_container .feedback').hide();
         $('.feedback_wrapper').addClass('feedback_wrapper_short'); // shrink the feedback container
         $('.close_button_link').hide();
     });
@@ -80,7 +80,7 @@ function orbisius_simple_feedback_setup_js() {
         $('#orbisius_beta_feedback_form_submit').hide();
         $('#orbisius_beta_feedback_form_submit').after('<span class="loading">Please wait...</span>');
 
-        $('.orbisius_beta_feedback_container .result').text('').removeClass('error success').hide();
+        $('.orbisius_simple_feedback_container .result').text('').removeClass('error success').hide();
 
         $.ajax({
             type : "post",
@@ -89,13 +89,13 @@ function orbisius_simple_feedback_setup_js() {
             data : $(this).serialize() + '&action=orbisius_simple_feedback_ajax&page_id=' + orbisius_simple_feedback_config.page_id,
             success: function(json) {
                if (json.status) {
-                  $('.orbisius_beta_feedback_container .result').text('Sent.').addClass('success').show();
+                  $('.orbisius_simple_feedback_container .result').text('Sent.').addClass('success').show();
                } else {
                   //alert("There was an error.");
-                  $('.orbisius_beta_feedback_container .result').text('There was an error.').addClass('error').show();
+                  $('.orbisius_simple_feedback_container .result').text('There was an error.').addClass('error').show();
                }
 
-               $('.orbisius_beta_feedback_container .loading').hide();
+               $('.orbisius_simple_feedback_container .loading').hide();
                $('#orbisius_beta_feedback_form_submit').show();
             }
         });

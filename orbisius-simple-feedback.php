@@ -179,7 +179,7 @@ function orbisius_simple_feedback_inject_feedback() {
     }
 
 	$form_buff = <<<FORM_EOF
-<div class="orbisius_beta_feedback_container">
+<div class="orbisius_simple_feedback_container">
     <div class="feedback_wrapper feedback_wrapper_short feedback_wrapper_$call_to_action_alignment" onmouseover="try { orbisius_simple_feedback_setup_js(); } catch (e) {} ">
         <div class="feedback_title">
 			<strong>$call_to_action</strong> <span class="result hide"></span>
@@ -194,7 +194,7 @@ function orbisius_simple_feedback_inject_feedback() {
 			$powered_by_line
 		</div>
     </div>
-</div> <!-- /orbisius_beta_feedback_container -->
+</div> <!-- /orbisius_simple_feedback_container -->
 
 FORM_EOF;
 
