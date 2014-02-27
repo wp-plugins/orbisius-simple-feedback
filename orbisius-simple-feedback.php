@@ -347,7 +347,7 @@ function orbisius_simple_feedback_get_options() {
         'show_in_admin' => 0,
         'call_to_action' => 'Feedback',
         'feedback_box' => 'textarea',
-        'call_to_action_alignment' => 'bottom_center',
+        'call_to_action_alignment' => 'bottom_right',
     );
     
     $opts = get_option('orbisius_simple_feedback_options');
