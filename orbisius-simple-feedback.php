@@ -3,7 +3,7 @@
 Plugin Name: Orbisius Simple Feedback
 Plugin URI: http://club.orbisius.com/products/wordpress-plugins/orbisius-simple-feedback/
 Description: Generates a nice & simple Feedback form which is positioned at the bottom center of your visitor's browser window.
-Version: 1.0.1
+Version: 1.0.2
 Author: Svetoslav Marinov (Slavi)
 Author URI: http://orbisius.com
 */
@@ -77,6 +77,8 @@ function orbisius_simple_feedback_init() {
     $dev = empty($_SERVER['DEV_ENV']) ? 0 : 1;
     $suffix = $dev ? '' : '.min';
 
+    wp_enqueue_script('jquery');
+
     wp_register_style( 'simple_feedback', plugins_url("/assets/main{$suffix}.css", __FILE__) );
     wp_enqueue_style( 'simple_feedback' );
 
@@ -89,6 +91,16 @@ function orbisius_simple_feedback_init() {
         add_action( 'admin_enqueue_scripts', 'orbisius_simple_feedback_init' );
         add_action( 'admin_footer', 'orbisius_simple_feedback_inject_feedback' ); // be the last in the footer
     }
+
+    //Access the global $wp_version variable to see which version of WordPress is installed.
+    global $wp_version;
+
+    $color_picker = version_compare($wp_version, '3.5') >= 0
+            ? 'wp-color-picker' // new WP
+            : 'farbtastic'; // old WP
+
+    wp_enqueue_style($color_picker);
+    wp_enqueue_script($color_picker);
 }
 
 /**
@@ -183,6 +195,36 @@ FORM_EOF;
 }
 
 /**
+ *
+ * @return string
+ */
+function orbisius_simple_get_ip_list() {
+    $ips = array('REMOTE_ADDR: '. $_SERVER['REMOTE_ADDR']);
+
+     if (getenv('HTTP_CLIENT_IP')) {
+         $ips[] = 'HTTP_CLIENT_IP: '. getenv('HTTP_CLIENT_IP');
+     }
+
+     if (getenv('HTTP_X_FORWARDED_FOR')) {
+         $ips[] = 'HTTP_X_FORWARDED_FOR: ' . getenv('HTTP_X_FORWARDED_FOR');
+     }
+
+     if (getenv('HTTP_X_FORWARDED')) {
+         $ips[] = 'HTTP_X_FORWARDED: '. getenv('HTTP_X_FORWARDED');
+     }
+
+     if (getenv('HTTP_FORWARDED_FOR')) {
+         $ips[] = 'HTTP_FORWARDED_FOR: ' . getenv('HTTP_FORWARDED_FOR');
+     }
+
+     if (getenv('HTTP_FORWARDED')) {
+        $ips[] = 'HTTP_FORWARDED: ' . getenv('HTTP_FORWARDED');
+     }
+
+     return join(', ', $ips);
+}
+
+/**
  * Sends an email to the admin
  */
 function orbisius_simple_send_feedback() {
@@ -208,6 +250,8 @@ function orbisius_simple_send_feedback() {
     $message .= empty($params['feedback_email']) ? '' : "\nEmail: " . esc_attr($params['feedback_email']);
     $message .= "\nPage: " . esc_attr($page_link);
     $message .= empty($page_id) ? '' : "\nPage ID: " . esc_attr($page_id);
+    $message .= "\nBrowser: " . (empty($_SERVER['HTTP_USER_AGENT']) ? 'n/a' : $_SERVER['HTTP_USER_AGENT']);
+    $message .= "\n" . orbisius_simple_get_ip_list();
     $message .= "\nDate: " . date('r');
 
     $current_user_obj = wp_get_current_user();
@@ -377,7 +421,7 @@ function orbisius_simple_feedback_options_page() {
             </table>
 
             <p class="submit">
-                <input type="submit" class="button-primary" value="<?php _e('Save') ?>" />
+                <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
             </p>
         </form>
 

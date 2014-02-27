@@ -4,7 +4,7 @@ Contributors: lordspace
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: wp,orbisius,feedback,chat,contact,contact form,contact, contact button, contact chat, contact form, contact plugin, contact us, contact form 7
 Requires at least: 2.6
-Tested up to: 3.5.2
+Tested up to: 3.8.1
 Stable tag: 1.0.1
 License: GPLv2 or later
 
@@ -32,7 +32,7 @@ This plugin is useful when you have a private beta or want to collect some feedb
 == Demo ==
 TODO
 
-Bugs? Suggestions? If you want a faster reponse contact us through our website's contact form [ orbisius.com ] and not through the support tab of this plugin or WordPress forums.
+Bugs? Suggestions? If you want a faster response contact us through our website's contact form [ orbisius.com ] and not through the support tab of this plugin or WordPress forums.
 We don't get notified when such requests get posted in the forums.
 
 > Support is handled on our site: <a href="http://club.orbisius.com/" target="_blank" title="[new window]">http://club.orbisius.com/</a>
@@ -68,6 +68,10 @@ If you don't want to give us credit :( add this line to your functions.php
 add_filter('orbisius_simple_feedback_filter_powered_by', '__return_false', 10);
 
 == Changelog ==
+
+= 1.0.2 =
+* Including the IP address(es) of the person and their browser in the message
+* Tested with WP 3.8.1
 
 = 1.0.1 =
 * Added a setting so the feedback box can be optionally shown in the admin area as well.
