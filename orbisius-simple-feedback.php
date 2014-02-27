@@ -115,7 +115,7 @@ function orbisius_simple_feedback_handle_ajax() {
    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])
            && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
            ) {
-       $status_rec['status'] = orbisius_simple_send_feedback();
+       $status_rec['status'] = orbisius_simple_feedback_send_feedback();
    }
 
    $result = json_encode($status_rec);
@@ -205,7 +205,7 @@ FORM_EOF;
  * Lookps through different $_SERVER fields to get all of the IPs.
  * @return string
  */
-function orbisius_simple_get_ip_list() {
+function orbisius_simple_feedback_get_ip_list() {
     $ips = array();
     
     $vars = array(
@@ -232,7 +232,7 @@ function orbisius_simple_get_ip_list() {
 /**
  * Sends an email to the admin
  */
-function orbisius_simple_send_feedback() {
+function orbisius_simple_feedback_send_feedback() {
     $headers = array();
     $params = $_REQUEST;
     $page_id = empty($params['page_id']) ? 0 : intval($params['page_id']);
@@ -256,7 +256,7 @@ function orbisius_simple_send_feedback() {
     $message .= "\nPage: " . esc_attr($page_link);
     $message .= empty($page_id) ? '' : "\nPage ID: " . esc_attr($page_id);
     $message .= "\nBrowser: " . (empty($_SERVER['HTTP_USER_AGENT']) ? 'n/a' : $_SERVER['HTTP_USER_AGENT']);
-    $message .= "\n" . orbisius_simple_get_ip_list();
+    $message .= "\n" . orbisius_simple_feedback_get_ip_list();
     $message .= "\nDate: " . date('r');
 
     $current_user_obj = wp_get_current_user();
