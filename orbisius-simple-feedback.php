@@ -3,7 +3,7 @@
 Plugin Name: Orbisius Simple Feedback
 Plugin URI: http://club.orbisius.com/products/wordpress-plugins/orbisius-simple-feedback/
 Description: Generates a nice & simple Feedback form which is positioned at the bottom center of your visitor's browser window.
-Version: 1.0.3
+Version: 1.0.4
 Author: Svetoslav Marinov (Slavi)
 Author URI: http://orbisius.com
 */
@@ -271,8 +271,12 @@ function orbisius_simple_feedback_send_feedback() {
 
     $message = "Somebody just left you some feedback\n";
     $message .= empty($params['feedback_email']) ? '' : "\nEmail: " . esc_attr($params['feedback_email']);
-    $message .= "\nPage: " . esc_attr($page_link);
-    $message .= empty($page_id) ? '' : "\nPage ID: " . esc_attr($page_id);
+    
+    if (!empty($page_id)) {
+        $message .= "\nPage ID: " . esc_attr($page_id);
+        $message .= "\nPage Link: " . get_permalink($page_id);
+    }
+
     $message .= "\nBrowser: " . (empty($_SERVER['HTTP_USER_AGENT']) ? 'n/a' : $_SERVER['HTTP_USER_AGENT']);
     $message .= "\n" . orbisius_simple_feedback_get_ip_list();
     $message .= "\nDate: " . date('r');
