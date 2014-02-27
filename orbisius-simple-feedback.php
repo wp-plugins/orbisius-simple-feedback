@@ -169,18 +169,25 @@ function orbisius_simple_feedback_inject_feedback() {
        $email = esc_attr($email);
     }
 
-    $call_to_action = empty($opts['call_to_action']) ? 'Share your feedback' : $opts['call_to_action'];
+    $call_to_action = empty($opts['call_to_action']) ? 'Feedback' : $opts['call_to_action'];
+    $call_to_action_alignment = empty($opts['call_to_action_alignment']) ? '' : $opts['call_to_action_alignment'];
+
+    if ($opts['feedback_box'] == 'input_text') {
+        $text_box = '<input type="text" id="feedback_text" name="feedback_text" value="" class="feedback_text" placeholder="Enter your feedback here..." autocomplete="off" />';
+    } else {
+        $text_box = '<textarea id="feedback_text" name="feedback_text" class="feedback_text" placeholder="Enter your feedback here..." rows="2" cols="10"></textarea>';
+    }
 
 	$form_buff = <<<FORM_EOF
 <div class="orbisius_beta_feedback_container">
-    <div class="feedback_wrapper feedback_wrapper_short" onmouseover="try { orbisius_simple_feedback_setup_js(); } catch (e) {} ">
+    <div class="feedback_wrapper feedback_wrapper_short feedback_wrapper_$call_to_action_alignment" onmouseover="try { orbisius_simple_feedback_setup_js(); } catch (e) {} ">
         <div class="feedback_title">
 			<strong>$call_to_action</strong> <span class="result hide"></span>
             <a href="javascript:void(0);" class='close_button_link hide'><span __class='close_button'>X</span></a>
         </div>
 		<div class="feedback hide">
 			<form id="orbisius_beta_feedback_form" class="orbisius_beta_feedback_form">
-				<input type="text" id="feedback_text" name="feedback_text" value="" class="feedback_text" placeholder="Enter your feedback here..." autocomplete="off" />
+				$text_box
 				<input type="text" id="feedback_email" name="feedback_email" value="$email" class="feedback_email" placeholder="Your email" />
 				<input type="submit" id="orbisius_beta_feedback_form_submit" name="send" value="send" />
 			</form>
@@ -195,33 +202,31 @@ FORM_EOF;
 }
 
 /**
- *
+ * Lookps through different $_SERVER fields to get all of the IPs.
  * @return string
  */
 function orbisius_simple_get_ip_list() {
-    $ips = array('REMOTE_ADDR: '. $_SERVER['REMOTE_ADDR']);
+    $ips = array();
+    
+    $vars = array(
+        'REMOTE_ADDR',
+        'HTTP_X_FORWARDED',
+        'HTTP_X_FORWARDED_FOR',
+        'HTTP_FORWARDED',
+        'HTTP_FORWARDED_FOR',
+    );
 
-     if (getenv('HTTP_CLIENT_IP')) {
-         $ips[] = 'HTTP_CLIENT_IP: '. getenv('HTTP_CLIENT_IP');
-     }
+    foreach ($vars as $key) {
+        if (!empty($_SERVER[$key])) {
+            $ips[] = "$key: " . $_SERVER[$key];
+        }
+    }
 
-     if (getenv('HTTP_X_FORWARDED_FOR')) {
-         $ips[] = 'HTTP_X_FORWARDED_FOR: ' . getenv('HTTP_X_FORWARDED_FOR');
-     }
+    $ips = array_map('trim', $ips);
+    $ips = array_map('strip_tags', $ips);
+    $ips = array_map('htmlentities', $ips);
 
-     if (getenv('HTTP_X_FORWARDED')) {
-         $ips[] = 'HTTP_X_FORWARDED: '. getenv('HTTP_X_FORWARDED');
-     }
-
-     if (getenv('HTTP_FORWARDED_FOR')) {
-         $ips[] = 'HTTP_FORWARDED_FOR: ' . getenv('HTTP_FORWARDED_FOR');
-     }
-
-     if (getenv('HTTP_FORWARDED')) {
-        $ips[] = 'HTTP_FORWARDED: ' . getenv('HTTP_FORWARDED');
-     }
-
-     return join(', ', $ips);
+    return join(', ', $ips);
 }
 
 /**
@@ -334,7 +339,9 @@ function orbisius_simple_feedback_get_options() {
     $defaults = array(
         'status' => 1,
         'show_in_admin' => 0,
-        'call_to_action' => 'Share your feedback',
+        'call_to_action' => 'Feedback',
+        'feedback_box' => 'textarea',
+        'call_to_action_alignment' => 'bottom_center',
     );
     
     $opts = get_option('orbisius_simple_feedback_options');
@@ -385,7 +392,40 @@ function orbisius_simple_feedback_options_page() {
                                    name="orbisius_simple_feedback_options[call_to_action]"
                                 value="<?php echo esc_attr($opts['call_to_action']); ?>" />
                         </label>
-                        <p>Example: Share your feedback.</p>
+                        <p>Example: Feedback or Share your feedback.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Call to action alignment</th>
+                    <td>
+                        <label for="orbisius_simple_feedback_options_call_to_action_alignment">
+                            <?php
+
+                            $call_to_action_alignment_opts = array(
+                                'bottom_left' => 'Bottom Left',
+                                'bottom_center' => 'Bottom Center',
+                                'bottom_right' => 'Bottom Right',
+                            );
+                            
+                            echo orbisius_simple_feedback_util::html_boxes('orbisius_simple_feedback_options[call_to_action_alignment]',
+                                    empty($opts['call_to_action_alignment']) ? '' : $opts['call_to_action_alignment'], $call_to_action_alignment_opts); ?>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Call to action alignment</th>
+                    <td>
+                        <label for="orbisius_simple_feedback_options_feedback_box">
+                            <?php
+
+                            $feedback_box_opts = array(
+                                'textarea' => 'Textarea',
+                                'input_text' => 'Input Text Box',
+                            );
+
+                            echo orbisius_simple_feedback_util::html_boxes('orbisius_simple_feedback_options[feedback_box]',
+                                    empty($opts['feedback_box']) ? '' : $opts['feedback_box'], $feedback_box_opts); ?>
+                        </label>
                     </td>
                 </tr>
                 <tr valign="top">
@@ -544,4 +584,51 @@ function orbisius_simple_feedback_add_plugin_credits() {
     $name = $plugin_data['Name'];
 
     printf(PHP_EOL . PHP_EOL . '<!-- ' . "Powered by $name | URL: $url " . '-->' . PHP_EOL . PHP_EOL);
+}
+
+class orbisius_simple_feedback_util {
+    /**
+     * Generates radio or checkboxes. If $sel is empty the first element from the $options array
+     * will be used as default. This supports checkboxes if [ is used in the name -> array values so it switches to checkboxes instead.
+     * Multiple values will be selected.
+     * $buff .= 'License: ' . orbisius_simple_feedback_util::html_boxes('license', empty($_REQUEST['license']) ? '' : $_REQUEST['license'], $license_types);
+     *
+     * @param type $name
+     * @param type $sel
+     * @param type $options
+     * @param type $attr
+     * @return string
+     */
+    public static function html_boxes($name = '', $sel = null, $options = array(), $attr = '') {
+        $id = strtolower($name);
+        $id = preg_replace('#[^\w-]#si', '_', $id);
+        $id = trim($id, '_ ');
+        $id = esc_attr($id);
+        $name = esc_attr($name);
+        $html = "\n<div id='$id' $attr>\n";
+
+        // if we have [ that means that the user is supposed to select multiple values
+        // therefore we'll use checkboxes. Smart, eh?
+        $type = (strpos($name, '[]') === false) ? 'radio' : 'checkbox';
+        $sep = "<br/>\n";
+
+        if (0&&!is_null($sel) && empty($sel)) {
+            $first_key = key($options); // First Element's Key
+            //$first_value = reset($options); // First Element's Value
+
+            $sel = $first_key;
+        }
+
+        $sel_mod = (array) $sel;
+
+        foreach ($options as $key => $label) {
+            $checked = count(array_intersect($sel_mod, array($key, $label))) ? ' checked="checked"' : '';
+            $html .= "\t<label> <input type='$type' name='$name' value='$key' $checked> $label</label>" . $sep;
+        }
+
+        $html .= '</div>';
+        $html .= "\n";
+
+        return $html;
+    }
 }

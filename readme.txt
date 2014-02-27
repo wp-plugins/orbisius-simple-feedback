@@ -71,6 +71,8 @@ add_filter('orbisius_simple_feedback_filter_powered_by', '__return_false', 10);
 
 = 1.0.2 =
 * Including the IP address(es) of the person and their browser in the message
+* Added alignment options for the feedback call to action: bottom left, bottom center, bottom right.
+* Added an option to choose of having a textbox or a textarea for the feedback message
 * Tested with WP 3.8.1
 
 = 1.0.1 =

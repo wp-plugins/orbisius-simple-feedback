@@ -26,16 +26,31 @@
 }
 
 .orbisius_beta_feedback_container .feedback_wrapper {
-    background: none repeat scroll 0 0 #ccc;
-    height: auto;
-    margin: auto;
-    width: 50%;
     padding:5px;
-    border:1px dashed #777;
+    margin:1px;
+    background: none repeat scroll 0 0 #ccc;
+    border:1px solid #999;
+}
+
+.orbisius_beta_feedback_container .feedback_wrapper_bottom_center {
+    /*height: auto;
+    margin: auto;
+    width: 50%;*/
+    /* by using this approach the call to action text box takes as much space as it needs */
+    float: left;
+    margin-left:50%;
+}
+
+.orbisius_beta_feedback_container .feedback_wrapper_bottom_left {
+    float: left;
+}
+
+.orbisius_beta_feedback_container .feedback_wrapper_bottom_right {
+    float: right;
 }
 
 .orbisius_beta_feedback_container .feedback_wrapper_short {
-    width: 20%;
+    _width: 5%;
 }
 
 .orbisius_beta_feedback_container .feedback {
@@ -65,6 +80,10 @@
 .orbisius_beta_feedback_container .close_button_link {
     float: right;
     padding-right: 2px;
+    color: red;
+    text-decoration: none;
+    padding:3px;
+    font-weight: bolder;
 }
 
 .orbisius_beta_feedback_container .close_button {
