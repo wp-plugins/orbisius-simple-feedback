@@ -48,8 +48,10 @@ n/a
 == Screenshots ==
 1. Plugins
 2. Settings Page
-3. Live demo (collapsed)
+3. Live demo (collapsed - center)
 4. Live demo (expanded)
+5. Live demo (left align)
+6. Live demo (right align)
 
 == Installation ==
 
@@ -78,6 +80,7 @@ add_filter('orbisius_simple_feedback_filter_powered_by', '__return_false', 10);
 * Fixes and improvements
 * Hid status -> not necessary to enable it explicitely
 * Improved the UI of the settings page.
+* Updated screenshots and added 2 more for left and right align of the call to action
 * Tested with WP 3.8.1
 
 = 1.0.1 =
