@@ -240,6 +240,7 @@ function orbisius_simple_feedback_get_ip_list() {
         }
     }
 
+	$ips = array_unique($ips);
     $ips = array_map('trim', $ips);
     $ips = array_map('strip_tags', $ips);
     $ips = array_map('htmlentities', $ips);

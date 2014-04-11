@@ -71,6 +71,9 @@ add_filter('orbisius_simple_feedback_filter_powered_by', '__return_false', 10);
 
 == Changelog ==
 
+= 1.0.5 =
+* Made the IPs to be unique (the plugin uses multiple ways to find the IP)
+
 = 1.0.4 =
 * Fix: the page ID was included but not the page link
 
