@@ -161,7 +161,7 @@ function orbisius_simple_feedback_inject_feedback() {
     
     $xyz = "<a href='$url' target='_blank' title='opens in a new tab/page.'>{$data['name']}</a>";
 
-    $powered_by_line = empty($opts['powered_by']) ? '' : "<div class='powered_by'>Powered by $xyz</div>";
+    $powered_by_line = empty($opts['show_powered_by']) ? '' : "<div class='powered_by'>Powered by $xyz</div>";
 
     // in case if somebody wants to get rid if the feedback link
     $powered_by_line = apply_filters('orbisius_simple_feedback_filter_powered_by', $powered_by_line);
@@ -363,7 +363,7 @@ function orbisius_simple_feedback_get_options() {
         'status' => 1,
         'feedback_box' => 'textarea',
         'show_in_admin' => 0,
-        'powered_by' => 1,
+        'show_powered_by' => 0,
         'call_to_action' => 'Feedback',
         'call_to_action_type' => 'image_text',
         'call_to_action_alignment' => 'bottom_right',
@@ -468,8 +468,8 @@ function orbisius_simple_feedback_options_page() {
                                                     <?php
 
                                                     $feedback_box_opts = array(
-                                                        'textarea' => 'Textarea',
-                                                        'input_text' => 'Input Text Box',
+                                                        'input_text' => 'Input Text Box (smaller box)',
+                                                        'textarea' => 'Textarea (larger box)',
                                                     );
 
                                                     echo orbisius_simple_feedback_util::html_boxes('orbisius_simple_feedback_options[feedback_box]',
@@ -482,12 +482,12 @@ function orbisius_simple_feedback_options_page() {
                                             <td>
                                                 <label for="radio_show_in_admin_enabled">
                                                     <input type="radio" id="radio_show_in_admin_enabled" name="orbisius_simple_feedback_options[show_in_admin]"
-                                                        value="1" <?php echo empty($opts['show_in_admin']) ? '' : 'checked="checked"'; ?> /> Enabled
+                                                        value="1" <?php echo empty($opts['show_in_admin']) ? '' : 'checked="checked"'; ?> /> Yes
                                                 </label>
                                                 <br/>
                                                 <label for="radio_show_in_admin_disabled">
                                                     <input type="radio" id="radio_show_in_admin_disabled" name="orbisius_simple_feedback_options[show_in_admin]"
-                                                        value="0" <?php echo!empty($opts['show_in_admin']) ? '' : 'checked="checked"'; ?> /> Disabled
+                                                        value="0" <?php echo!empty($opts['show_in_admin']) ? '' : 'checked="checked"'; ?> /> No
                                                 </label>
                                             </td>
                                         </tr>
@@ -495,14 +495,14 @@ function orbisius_simple_feedback_options_page() {
                                         <tr valign="top">
                                             <th scope="row">Show Powered By Text/Link</th>
                                             <td>
-                                                <label for="radio_powered_by_enabled">
-                                                    <input type="radio" id="radio_powered_by_enabled" name="orbisius_simple_feedback_options[powered_by]"
-                                                        value="1" <?php echo empty($opts['powered_by']) ? '' : 'checked="checked"'; ?> /> Yes (recommended)
+                                                <label for="radio_show_powered_by_enabled">
+                                                    <input type="radio" id="radio_show_powered_by_enabled" name="orbisius_simple_feedback_options[show_powered_by]"
+                                                        value="1" <?php echo empty($opts['show_powered_by']) ? '' : 'checked="checked"'; ?> /> Yes (recommended)
                                                 </label>
                                                 <br/>
-                                                <label for="radio_powered_by_disabled">
-                                                    <input type="radio" id="radio_powered_by_disabled" name="orbisius_simple_feedback_options[powered_by]"
-                                                        value="0" <?php echo !empty($opts['powered_by']) ? '' : 'checked="checked"'; ?> /> No
+                                                <label for="radio_show_powered_by_disabled">
+                                                    <input type="radio" id="radio_show_powered_by_disabled" name="orbisius_simple_feedback_options[show_powered_by]"
+                                                        value="0" <?php echo !empty($opts['show_powered_by']) ? '' : 'checked="checked"'; ?> /> No
                                                 </label>
                                             </td>
                                         </tr>
