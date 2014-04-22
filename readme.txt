@@ -1,11 +1,10 @@
 === Orbisius Simple Feedback ===
-
-Contributors: lordspace
+Contributors: lordspace,orbisius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: wp,orbisius,feedback,chat,contact,contact form,contact, contact button, contact chat, contact form, contact plugin, contact us, contact form 7
 Requires at least: 2.6
-Tested up to: 3.8.1
-Stable tag: 1.0.4
+Tested up to: 3.9
+Stable tag: 1.0.5
 License: GPLv2 or later
 
 Generates a nice & simple Feedback form which is positioned at the bottom center of your visitor's browser window.
@@ -73,6 +72,8 @@ add_filter('orbisius_simple_feedback_filter_powered_by', '__return_false', 10);
 
 = 1.0.5 =
 * Made the IPs to be unique (the plugin uses multiple ways to find the IP)
+* Added an option in the settings to enable/disable powered by
+* Tested with WP 3.9
 
 = 1.0.4 =
 * Fix: the page ID was included but not the page link
