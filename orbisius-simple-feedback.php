@@ -3,7 +3,7 @@
 Plugin Name: Orbisius Simple Feedback
 Plugin URI: http://club.orbisius.com/products/wordpress-plugins/orbisius-simple-feedback/
 Description: Generates a nice & simple Feedback form which is positioned at the bottom center of your visitor's browser window.
-Version: 1.0.5
+Version: 1.0.6
 Author: Svetoslav Marinov (Slavi)
 Author URI: http://orbisius.com
 */
@@ -148,8 +148,8 @@ function orbisius_simple_feedback_inject_feedback() {
     $data = orbisius_simple_feedback_get_plugin_data();
 
     // The user doesn't want to show the form.
-    if (0&&empty($opts['status'])) {
-        echo "\n<!-- {$data['name']} | {$data['url']} : is disabled. Skipping rendering. -->\n";
+    if ( defined( 'DOING_AJAX' ) || 0&&empty($opts['status'])) {
+        echo "\n<!-- {$data['name']} | {$data['url']} : is disabled or it's an ajax request. Skipping rendering. -->\n";
         return ;
     }
 

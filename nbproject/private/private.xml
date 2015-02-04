@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="3">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="5">
         <file>
             <url>orbisius-simple-feedback.php</url>
+            <bookmark id="5">
+                <name/>
+                <line>163</line>
+                <key/>
+            </bookmark>
             <bookmark id="3">
                 <name/>
                 <line>179</line>
@@ -13,16 +18,22 @@
                 <line>203</line>
                 <key/>
             </bookmark>
+            <bookmark id="4">
+                <name/>
+                <line>499</line>
+                <key/>
+            </bookmark>
             <bookmark id="2">
                 <name/>
-                <line>763</line>
+                <line>779</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/C:/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-simple-feedback/orbisius-simple-feedback.php</file>
-        <file>file:/C:/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-simple-feedback/assets/main.js</file>
-        <file>file:/C:/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-simple-feedback/readme.txt</file>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-simple-feedback/orbisius-simple-feedback.php</file>
+            <file>file:/C:/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-simple-feedback/readme.txt</file>
+        </group>
     </open-files>
 </project-private>

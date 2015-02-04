@@ -70,6 +70,11 @@ add_filter('orbisius_simple_feedback_filter_powered_by', '__return_false', 10);
 
 == Changelog ==
 
+= 1.0.6 =
+* Tested with WP 4.1
+* Do not render if it's an ajax request
+* Removed the width so it doesn't block elements under it
+
 = 1.0.5 =
 * Made the IPs to be unique (the plugin uses multiple ways to find the IP)
 * Added an option in the settings to enable/disable powered by
