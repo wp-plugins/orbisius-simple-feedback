@@ -3,8 +3,8 @@ Contributors: lordspace,orbisius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: wp,orbisius,feedback,chat,contact,contact form,contact, contact button, contact chat, contact form, contact plugin, contact us, contact form 7
 Requires at least: 2.6
-Tested up to: 3.9
-Stable tag: 1.0.5
+Tested up to: 4.1
+Stable tag: 1.0.6
 License: GPLv2 or later
 
 Generates a nice & simple Feedback form which is positioned at the bottom center of your visitor's browser window.
